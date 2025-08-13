@@ -1,6 +1,6 @@
 services:
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.0.0
+    image: confluentinc/cp-zookeeper:7.4.0
     container_name: zookeeper
     hostname: zookeeper
     ports:
@@ -8,8 +8,10 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_DATA_DIR: /var/lib/zookeeper/data
+      ZOOKEEPER_DATA_LOG_DIR: /var/lib/zookeeper/log
     healthcheck:
-      test: ['CMD', 'bash', '-c', "echo 'ruok' | nc localhost 2181"]
+      test: ['CMD', 'bash', '-c', "echo ruok | nc -w 2 localhost 2181 | grep imok"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -17,7 +19,7 @@ services:
       - confluent
     user: "0:0"
     volumes:
-      - zookeeper_data:/var/lib/zookeeper
+      - zookeeper_data:/var/lib/zookeeper/data
       - zookeeper_log:/var/lib/zookeeper/log
 
   broker:
@@ -100,8 +102,7 @@ services:
     environment:
       - MAX_HEAP_SIZE=512M
       - HEAP_NEWSIZE=100M
-      - CASSANDRA_USERNAME=cassandra
-      - CASSANDRA_PASSWORD=cassandra
+      # (tuỳ chọn) các biến USERNAME/PASSWORD của image cassandra official không dùng, có thể bỏ
     networks:
       - confluent
     user: "0:0"
