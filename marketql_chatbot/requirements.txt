@@ -1,0 +1,6 @@
+langchain>=0.2.0
+langchain-openai>=0.1.7
+langchain-community>=0.2.0
+cassandra-driver>=3.29.0
+python-dotenv>=1.0.1
+pandas>=2.2.2

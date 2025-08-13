@@ -1,0 +1,70 @@
+CREATE TABLE IF NOT EXISTS market_data.ohlcv_1m (
+  symbol text,
+  day date,
+  time time,
+
+  open float,
+  high float,
+  low float,
+  close float,
+  volume bigint,
+
+  -- Moving Averages
+  ma5 float,
+  ma10 float,
+  ma20 float,
+  ma50 float,
+  ma100 float,
+  ma200 float,
+
+  -- Bollinger Bands
+  bb_upper float,
+  bb_middle float,
+  bb_lower float,
+
+  -- MACD
+  macd_line float,
+  macd_signal float,
+  macd_histogram float,
+
+  -- RSI
+  rsi14 float,
+
+  -- ADX
+  adx float,
+  plus_di float,
+  minus_di float,
+
+  -- Stochastic Oscillator
+  stoch_k float,
+  stoch_d float,
+
+  -- CCI
+  cci float,
+
+  -- ATR
+  atr float,
+
+  -- Parabolic SAR
+  parabolic_sar float,
+
+  -- OBV
+  obv float,
+
+  -- Volume Moving Average
+  volume_ma20 float,
+
+  -- MFI
+  mfi float,
+
+  -- Pivot Points
+  pivot float,
+  support1 float,
+  support2 float,
+  support3 float,
+  resistance1 float,
+  resistance2 float,
+  resistance3 float,
+
+  PRIMARY KEY ((symbol, day), time)
+);
